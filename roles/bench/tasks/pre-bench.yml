@@ -4,11 +4,11 @@
 - name: Reset reverse proxy
   import_tasks: ./roles/reverse_proxy/tasks/reset.yml
 
-- name: Reset rdbms
+- name: Reset DB
   import_tasks: ./roles/db/tasks/reset.yml
 
 - name: Reset env
-  import_tasks: ./roles/db/tasks/reset.yml
+  import_tasks: ./roles/application/tasks/reset.yml
 
 - name: Apply kernel
   import_tasks: ./roles/kernel/tasks/apply.yml
@@ -17,4 +17,4 @@
   import_tasks: ./roles/netdata/tasks/apply.yml
 
 - name: deploy
-  import_tasks: build-deploy.yml
+  import_tasks: ./roles/application/tasks/main.yml

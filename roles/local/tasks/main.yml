@@ -6,29 +6,29 @@
         HostName {{ ssh.ip }}
         User {{ ssh.name }}
 
-- name: set ssh config with bastation
-  blockinfile:
-    path: ~/.ssh/config
-    block: |
-      Host {{ bastation }}
-        HostName {{ bastation_ip }}
-        Port {{ bastation_port }}
-        User {{ ssh_user }}
+# - name: set ssh config with bastation
+#   blockinfile:
+#     path: ~/.ssh/config
+#     block: |
+#       Host {{ bastation }}
+#         HostName {{ bastation_ip }}
+#         Port {{ bastation_port }}
+#         User {{ ssh_user }}
 
-      Host {{ host1 }}
-        HostName {{ host1_ip }}
-        User {{ ssh_user }}
-        ProxyJump {{ host1 }}-bastion
+#       Host {{ host1 }}
+#         HostName {{ host1_ip }}
+#         User {{ ssh_user }}
+#         ProxyJump {{ host1 }}-bastion
 
-      Host {{ host2 }}
-        HostName {{ host2_ip }}
-        User {{ ssh_user }}
-        ProxyJump {{ host2 }}-bastion
+#       Host {{ host2 }}
+#         HostName {{ host2_ip }}
+#         User {{ ssh_user }}
+#         ProxyJump {{ host2 }}-bastion
 
-      Host {{ host3 }}
-        HostName {{ host3_ip }}
-        User {{ ssh_user }}
-        ProxyJump {{ host3 }}-bastion
+#       Host {{ host3 }}
+#         HostName {{ host3_ip }}
+#         User {{ ssh_user }}
+#         ProxyJump {{ host3 }}-bastion
 
 # .PHONY: ssh-keygen
 # ssh-keygen:

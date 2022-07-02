@@ -1,5 +1,0 @@
-- name: git pull
-  import_tasks: ./roles/git/tasks/pull.yml
-
-- name: build and deploy
-  import_tasks: ./roles/application/tasks/main.yml
