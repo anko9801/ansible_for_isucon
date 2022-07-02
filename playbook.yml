@@ -1,4 +1,9 @@
-- hosts: isucon2022-1
+- hosts: localhost
   become: true
   roles:
-    - system
+    - local
+# - hosts: isucon2022-1
+#   remote_user: "{{ ssh.name }}"
+#   become: true
+#   roles:
+#     - init

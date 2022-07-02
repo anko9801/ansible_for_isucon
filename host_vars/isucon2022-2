@@ -1,5 +1,0 @@
-hostname: isucon2
-ssh:
-  name: isucon
-  ip:
-discord_webhook_url:

@@ -1,2 +1,4 @@
+hosts
 host_vars/*
 !host_vars/.gitkeep
+
