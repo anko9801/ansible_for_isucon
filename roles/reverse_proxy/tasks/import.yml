@@ -1,6 +1,4 @@
 - name: Import Nginx config
   shell: |
     sudo cp -r -i /etc/nginx/ {{ project_root }}/settings/nginx/
-    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxの設定ファイルをコピーしました。"}' {{ webhook_url }} -s -o /dev/null
-  args:
-    creates: "{{ project_root }}/settings"
+    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxの設定ファイルをコピーしました。"}' {{ discord_webhook_url }} -s -o /dev/null

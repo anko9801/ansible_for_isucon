@@ -1,0 +1,11 @@
+- name: Install golang
+  import_tasks: install-go.yml
+
+- name: Install MySQL
+  import_tasks: ./roles/db/tasks/install.yml
+
+- name: Install Nginx
+  import_tasks: ./roles/reverse_proxy/tasks/install.yml
+
+- name: Install netdata
+  import_tasks: ./roles/netdata/tasks/install.yml

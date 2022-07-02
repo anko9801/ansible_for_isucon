@@ -1,0 +1,18 @@
+- name: Uninstall golang
+  apt:
+    name: golang
+    state: absent
+
+# $(eval GO_CUR_PATH := $(shell which go | sed 's/\/bin\/go//'))
+- name: Install golang
+  shell: |
+    export GO_CUR_PATH=$(which go | sed 's/\/bin\/go//')
+    sudo rm -rf $(GO_CUR_PATH)
+    wget -P /temp https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
+    sudo tar -C $(GO_CUR_PATH) /temp/go{{ go_version }}.linux-amd64.tar.gz
+    rm /temp/go{{ go_version }}.linux-amd64.tar.gz
+  register: return_from_shell
+
+- name: show previous shell stdout
+  debug:
+    msg: "{{ return_from_shell.stdout }}"

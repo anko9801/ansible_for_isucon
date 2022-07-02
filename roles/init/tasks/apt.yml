@@ -7,6 +7,7 @@
 #   apt:
 #     upgrade: yes
 
+# --add-host="archive.ubuntu.com:160.26.2.187"
 - name: Install common packages
   apt:
     name:
@@ -15,5 +16,3 @@
       - graphviz
     state: latest
     update_cache: yes
-
-      --add-host="archive.ubuntu.com:160.26.2.187"

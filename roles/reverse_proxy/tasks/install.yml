@@ -1,14 +1,20 @@
 - name: Install Nginx
+  apt:
+    name:
+      - nginx
+    state: latest
+    update_cache: yes
+
+- name: send nginx installation completed
   shell: |
-    sudo apt update && sudo apt-get install nginx -y
-    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxを正常にインストールしました。"}' {{ webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxを正常にインストールしました。"}' {{ discord_webhook_url }} -s -o /dev/null
     sudo systemctl status nginx
-    nginx --version
+    nginx -v
 
 - name: Install kataribe
   shell: |
-    go install github.com/matsuu/kataribe@latest
-    kataribe -generate
-    curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' {{ webhook_url }} -s -o /dev/null
+    bash -lc "go install github.com/matsuu/kataribe@latest"
+    bash -lc "cd {{ project_root }}/settings && kataribe -generate"
+    curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' {{ discord_webhook_url }} -s -o /dev/null
   args:
-    chdir: "{{ project_root }}/settings"
+    chdir: "{{ project_root }}"

@@ -1,0 +1,16 @@
+- name: Send pprof
+  import_tasks: ./roles/application/tasks/log.yml
+
+- name: wait for bench
+  pause:
+    seconds: 60
+
+- name: Send Nginx log
+  import_tasks: ./roles/reverse_proxy/tasks/log.yml
+
+- name: Send MySQL log
+  import_tasks: ./roles/db/tasks/log.yml
+
+- name: Send bench completed
+  shell: |
+    curl -X POST -H "Content-type: application/json" -d '{"content": "ベンチマークのログを正常に送信しました。"}' {{ discord_webhook_url }} -s -o /dev/null

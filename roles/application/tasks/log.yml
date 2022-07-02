@@ -1,4 +1,4 @@
 - name: send pprof
   shell: |
     go tool pprof -png -output /temp/profile.png http://localhost:6060/debug/pprof/profile?seconds=60
-    curl -X POST -F img=@/temp/profile.png {{ webhook_url }} -s -o /dev/null
+    curl -X POST -F img=@/temp/profile.png {{ discord_webhook_url }} -s -o /dev/null

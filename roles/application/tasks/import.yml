@@ -1,13 +1,9 @@
 - name: Import env config
   shell: |
     cp -i {{ env_file }} {{ project_root }}/settings
-    curl -X POST -H "Content-type: application/json" -d '{"content": "{{ env_file }}をコピーしました。"}' {{ webhook_url }} -s -o /dev/null
-  args:
-    creates: "{{ project_root }}/settings"
+    curl -X POST -H "Content-type: application/json" -d '{"content": "{{ env_file }}をコピーしました。"}' {{ discord_webhook_url }} -s -o /dev/null
 
 - name: Import service config
   shell: |
     cp -i /etc/systemd/system/{{ systemctl_service }}.service {{ project_root }}/settings/
     curl -X POST -H "Content-type: application/json" -d '{"content": "serviceファイルをコピーしました。"}' {{ discord_webhook_url }} -s -o /dev/null
-  args:
-    creates: "{{ project_root }}/settings"

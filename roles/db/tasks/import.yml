@@ -1,6 +1,6 @@
 - name: Import MySQL config
   shell: |
     sudo cp -r -i /etc/mysql/ {{ project_root }}/settings/mysql/
-    curl -X POST -H "Content-type: application/json" -d '{"content": "MySQL/MariaDBの設定ファイルをコピーしました。"}' {{ webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "MySQL/MariaDBの設定ファイルをコピーしました。"}' {{ discord_webhook_url }} -s -o /dev/null
   args:
-    creates: "{{ project_root }}/settings"
+    chdir: "{{ project_root }}/settings"

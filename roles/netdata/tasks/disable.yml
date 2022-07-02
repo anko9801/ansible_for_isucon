@@ -3,4 +3,4 @@
     sudo systemctl stop netdata
     sudo systemctl disable netdata
     -@curl -X POST -H "Content-type: application/json" \
-      -d '{"content": "コードフリーズ状態に入る準備ができました。Nginx /MySQL / アプリケーションのログを合わせて切って下さい。"}' {{ webhook_url }} -s -o /dev/null
+      -d '{"content": "コードフリーズ状態に入る準備ができました。Nginx /MySQL / アプリケーションのログを合わせて切って下さい。"}' {{ discord_webhook_url }} -s -o /dev/null

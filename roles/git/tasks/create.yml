@@ -8,18 +8,25 @@
       value: "{{ git.username }}"
     - name: user.email
       value: "{{ git.email }}"
+    - name: safe.directory
+      value: "{{ project_root }}"
 
 - name: Create git repository
   shell: |
     git init
+  args:
+    chdir: "{{ project_root }}"
+
+- name: Add git remote repository
+  shell: |
     git remote add origin {{ git.repo }}
   args:
     chdir: "{{ project_root }}"
+  ignore_errors: true
 
 # TODO: 編集方法
 - name: Set gitignore
   shell: |
     find ./ -size +100M >> .gitignore
-    nano .gitignore
   args:
     chdir: "{{ project_root }}"

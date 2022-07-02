@@ -1,11 +1,12 @@
 - name: set ssh config
   blockinfile:
-    path: ~/.ssh/config
+    path: ${HOME}/.ssh/config
     block: |
-      Host {{ hostname }}
-        HostName {{ ssh.ip }}
-        User {{ ssh.name }}
-
+      Host {{ item.hostname }}
+        HostName {{ item.ssh.ip }}
+        User {{ item.ssh.name }}
+  loop:
+    - "{{ hosts.host1 }}"
 # - name: set ssh config with bastation
 #   blockinfile:
 #     path: ~/.ssh/config

@@ -5,7 +5,7 @@
     make reset-mysql
     sudo mysql -e "SELECT user, host FROM mysql.user;"
     curl -X POST -H "Content-type: application/json" \
-      -d '{"content": "MySQL/MariaDBのユーザーへの外部からのアクセスを許可しました。`bind_address`が`0.0.0.0`になっていることを確かめてください。"}' {{ webhook_url }} -s -o /dev/null
+      -d '{"content": "MySQL/MariaDBのユーザーへの外部からのアクセスを許可しました。`bind_address`が`0.0.0.0`になっていることを確かめてください。"}' {{ discord_webhook_url }} -s -o /dev/null
 
 - name: Get DB sample
   shell: |
@@ -16,7 +16,7 @@
       echo "-----$$table-----" >> /temp/sample.txt && \
       mysql -h{{ db.host }} -P{{ db.port }} -u{{ db.user }} -p{{ db.pass }} {{ db.name }} -t -e "SELECT * FROM $$table LIMIT 10;" >> /temp/sample.txt; \
     done
-    curl -X POST -F txt=@/temp/sample.txt {{ webhook_url }} -s -o /dev/null
+    curl -X POST -F txt=@/temp/sample.txt {{ discord_webhook_url }} -s -o /dev/null
 
 - name: Get DB status
   shell: |
@@ -29,4 +29,4 @@
     echo "-----DB Table & Column Info-----" >> /temp/status.txt
     mysql -h{{ db.host }} -P{{ db.port }} -u{{ db.user }} -p{{ db.pass }} -t \
       -e 'USE information_schema; SELECT table_name, column_name FROM columns WHERE table_schema="{{ db.name }}";' >> /temp/status.txt
-    curl -X POST -F txt=@/temp/status.txt {{ webhook_url }} -s -o /dev/null
+    curl -X POST -F txt=@/temp/status.txt {{ discord_webhook_url }} -s -o /dev/null

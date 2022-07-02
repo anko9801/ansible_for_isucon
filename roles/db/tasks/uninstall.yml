@@ -1,19 +1,19 @@
-- name: Remove MySQL
+- name: Uninstall MySQL
   shell: |
     sudo systemctl stop mysql
     sudo rm -r /etc/mysql
     mv {{ project_root }}/settings/mysql {{ project_root }}/settings/mysql-old
     sudo apt-get remove --purge mysql-\*  -y
     sudo apt-get autoremove --purge -y
-    curl -X POST -H "Content-type: application/json" -d '{"content": "MySQLを正常にアンインストールしました。"}' {{ webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "MySQLを正常にアンインストールしました。"}' {{ discord_webhook_url }} -s -o /dev/null
     sudo apt list --installed | grep mysql
 
-- name: Remove MariaDB
+- name: Uninstall MariaDB
   shell: |
     sudo systemctl stop mysql
     sudo rm -r /etc/mysql
     mv {{ project_root }}/settings/mysql {{ project_root }}/settings/mysql-old
     sudo apt-get remove --purge mysql-\* -y
     sudo apt-get autoremove --purge -y
-    curl -X POST -H "Content-type: application/json" -d '{"content": "MariaDBを正常にアンインストールしました。"}' {{ webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "MariaDBを正常にアンインストールしました。"}' {{ discord_webhook_url }} -s -o /dev/null
     sudo apt list --installed | grep mysql

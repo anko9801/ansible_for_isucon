@@ -4,4 +4,4 @@
     sudo cp -f {{ project_root }}/settings/100-isucon.conf /etc/sysctl.d/100-isucon.conf
     sudo sysctl -p /etc/sysctl.d/100-isucon.conf >> /dev/null
   args:
-    creates: "{{ project_root }}/settings"
+    chdir: "{{ project_root }}/settings"

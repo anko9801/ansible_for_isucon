@@ -1,7 +1,0 @@
-- name: Remove apache2
-  shell: |
-    sudo systemctl stop apache2
-    sudo apt-get remove --purge apache2 -y
-    sudo apt-get autoremove --purge -y
-    -@curl -X POST -H "Content-type: application/json" -d '{"content": "Apache2を正常にアンインストールしました。"}' {{ webhook_url }} -s -o /dev/null
-    sudo apt list --installed | grep apache2

@@ -1,0 +1,8 @@
+- name: Make directory
+  shell: |
+    sudo mkdir -p /temp && sudo chmod 777 /temp
+    mkdir -p {{ project_root }}/settings
+
+- name: chown
+  shell: sudo chown -R {{ user }}:{{ user }} {{ project_root }}
+  ignore_errors: true

@@ -1,6 +1,6 @@
 - name: Import netdata config
   shell: |
     cp /etc/netdata/apps_groups.conf {{ project_root }}/settings/
-    curl -X POST -H "Content-type: application/json" -d '{"content": "netdataの設定ファイルをコピーしました。"}' {{ webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "netdataの設定ファイルをコピーしました。"}' {{ discord_webhook_url }} -s -o /dev/null
   args:
-    creates: "{{ project_root }}/settings"
+    chdir: "{{ project_root }}/settings"
