@@ -6,7 +6,7 @@ git:
 
 # アプリケーション関連変数
 project_root: /home/isucon/webapp
-go_project_root: ${PROJECT_ROOT}/go
+go_project_root: "{{ project_root }}/go"
 go_latest_version: 1.18.3
 systemctl_service:
 build_name: main

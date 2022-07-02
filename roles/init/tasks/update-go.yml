@@ -6,7 +6,7 @@
 - name: Install golang
   shell: |
     $(eval GO_CUR_PATH := $(shell which go | sed 's/\/bin\/go//'))
-    sudo rm -rf $(GO_CUR_PATH)
+    sudo rm -rf {{ go_cur_path }}
     wget -P /temp https://go.dev/dl/go${GO_LATEST_VERSION}.linux-amd64.tar.gz
-    sudo tar -C $(GO_CUR_PATH) /temp/go${GO_LATEST_VERSION}.linux-amd64.tar.gz
+    sudo tar -C {{ go_cur_path }} /temp/go${GO_LATEST_VERSION}.linux-amd64.tar.gz
     rm /temp/go${GO_LATEST_VERSION}.linux-amd64.tar.gz

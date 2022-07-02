@@ -16,14 +16,14 @@
 
 - name: Send message of restart server
   shell: |
-    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーを再起動します。"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーを再起動します。"}' {{ webhook_url }} -s -o /dev/null
   ignore_errors: true
 
 - name: Restart
   shell: sudo shutdown -r now
 
 - name: chown
-  shell: sudo chown -R $(USER):$(USER) $(PROJECT_ROOT)
+  shell: sudo chown -R {{ user }}:{{ user }} {{ project_root }}
   ignore_errors: true
 
 - import_tasks: import.yml

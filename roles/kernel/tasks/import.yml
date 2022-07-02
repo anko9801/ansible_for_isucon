@@ -1,7 +1,7 @@
 - name: Create and apply kernel config
   shell: |
-    touch $(PROJECT_ROOT)/settings/100-isucon.conf
-    sudo cp -f $(PROJECT_ROOT)/settings/100-isucon.conf /etc/sysctl.d/100-isucon.conf
+    touch {{ project_root }}/settings/100-isucon.conf
+    sudo cp -f {{ project_root }}/settings/100-isucon.conf /etc/sysctl.d/100-isucon.conf
     sudo sysctl -p /etc/sysctl.d/100-isucon.conf >> /dev/null
   args:
-    creates: $(PROJECT_ROOT)/settings
+    creates: "{{ project_root }}/settings"

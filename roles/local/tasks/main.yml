@@ -1,52 +1,34 @@
-- name: set yum proxy
+- name: set ssh config
   blockinfile:
     path: ~/.ssh/config
-    insertafter: "^proxy=.*$"
     block: |
-      Host $(HOST1)
-        HostName $(HOST1_IP)
-        User $(SSH_USER)
+      Host {{ hostname }}
+        HostName {{ ssh.ip }}
+        User {{ ssh.name }}
 
-      Host $(HOST2)
-        HostName $(HOST2_IP)
-        User $(SSH_USER)
-
-      Host $(HOST3)
-        HostName $(HOST3_IP)
-        User $(SSH_USER)
-
-- name: bastation
+- name: set ssh config with bastation
   blockinfile:
     path: ~/.ssh/config
-    insertafter: "^proxy=.*$"
     block: |
-      Host $(BASTATION)
-        HostName $(BASTATION_IP)
-        Port $(BASTATION_PORT)
-        User $(SSH_USER)
+      Host {{ bastation }}
+        HostName {{ bastation_ip }}
+        Port {{ bastation_port }}
+        User {{ ssh_user }}
 
-      Host $(HOST1)
-        HostName $(HOST1_IP)
-        User $(SSH_USER)
-        ProxyJump $(HOST1)-bastion
+      Host {{ host1 }}
+        HostName {{ host1_ip }}
+        User {{ ssh_user }}
+        ProxyJump {{ host1 }}-bastion
 
-      Host $(HOST2)
-        HostName $(HOST2_IP)
-        User $(SSH_USER)
-        ProxyJump $(HOST2)-bastion
+      Host {{ host2 }}
+        HostName {{ host2_ip }}
+        User {{ ssh_user }}
+        ProxyJump {{ host2 }}-bastion
 
-      Host $(HOST3)
-        HostName $(HOST3_IP)
-        User $(SSH_USER)
-        ProxyJump $(HOST3)-bastion
-
-# .PHONY: ssh-%
-# ssh-%:
-#   ssh $(HOST${@:ssh-%=%})
-
-# .PHONY: ssh-reset
-# ssh-reset:
-#   rm -f ~/.ssh/config
+      Host {{ host3 }}
+        HostName {{ host3_ip }}
+        User {{ ssh_user }}
+        ProxyJump {{ host3 }}-bastion
 
 # .PHONY: ssh-keygen
 # ssh-keygen:

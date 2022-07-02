@@ -1,6 +1,6 @@
 - name: Reset MySQL
   shell: |
     sudo rm -r /etc/mysql
-    sudo cp -r $(PROJECT_ROOT)/settings/mysql/ /etc/mysql/
-    sudo truncate -s 0 -c $(MYSQL_LOG)
+    sudo cp -r {{ project_root }}/settings/mysql/ /etc/mysql/
+    sudo truncate -s 0 -c {{ mysql_log }}
     sudo systemctl restart mysql

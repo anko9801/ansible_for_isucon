@@ -9,4 +9,4 @@
 
 - name: send bench completed
   shell: |
-    curl -X POST -H "Content-type: application/json" -d '{"content": "ベンチマークのログを正常に送信しました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "ベンチマークのログを正常に送信しました。"}' {{ webhook_url }} -s -o /dev/null

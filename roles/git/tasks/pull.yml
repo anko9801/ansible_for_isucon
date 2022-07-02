@@ -1,6 +1,6 @@
 - name: git pull
   shell: |
     git pull origin main
-    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーへ現在のリポジトリをプルしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーへ現在のリポジトリをプルしました。"}' {{ webhook_url }} -s -o /dev/null
   args:
-    chdir: "$(PROJECT_ROOT)"
+    chdir: "{{ project_root }}"

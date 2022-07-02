@@ -3,7 +3,7 @@
 #   sudo systemctl status ${@:check-%=%}
 
 # .PHONY: check-service
-# check-service: check-$(SERVICE_NAME)
+# check-service: check-{{ systemctl_service }}
 
 # .PHONY: disable-%
 # disable-%:
@@ -17,5 +17,5 @@
 # disable-for-app: disable-mysql disable-nginx
 
 # .PHONY: disable-for-db
-# disable-for-db: disable-$(SERVICE_NAME) disable-nginx
+# disable-for-db: disable-{{ systemctl_service }} disable-nginx
 

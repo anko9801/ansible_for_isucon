@@ -1,7 +1,7 @@
 - name: Install Nginx
   shell: |
     sudo apt update && sudo apt-get install nginx -y
-    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxを正常にインストールしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "Nginxを正常にインストールしました。"}' {{ webhook_url }} -s -o /dev/null
     sudo systemctl status nginx
     nginx --version
 
@@ -9,6 +9,6 @@
   shell: |
     go install github.com/matsuu/kataribe@latest
     kataribe -generate
-    curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' {{ webhook_url }} -s -o /dev/null
   args:
-    chdir: $(PROJECT_ROOT)/settings
+    chdir: "{{ project_root }}/settings"

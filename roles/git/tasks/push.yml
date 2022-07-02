@@ -4,6 +4,6 @@
     git add .
     git commit --allow-empty -m "Commit from server"
     git push origin master:main
-    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーからプッシュしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーからプッシュしました。"}' {{ webhook_url }} -s -o /dev/null
   args:
-    chdir: "$(PROJECT_ROOT)"
+    chdir: "{{ project_root }}"

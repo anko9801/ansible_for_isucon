@@ -5,16 +5,16 @@
     value: "{{ item.value }}"
   loop:
     - name: user.name
-      value: "$(GIT_USERNAME)"
+      value: "{{ git.username }}"
     - name: user.email
-      value: "$(GIT_EMAIL)"
+      value: "{{ git.email }}"
 
 - name: Create git repository
   shell: |
     git init
-    git remote add origin $(GIT_REPO)
+    git remote add origin {{ git.repo }}
   args:
-    chdir: "$(PROJECT_ROOT)"
+    chdir: "{{ project_root }}"
 
 # TODO: 編集方法
 - name: Set gitignore
@@ -22,4 +22,4 @@
     find ./ -size +100M >> .gitignore
     nano .gitignore
   args:
-    chdir: "$(PROJECT_ROOT)"
+    chdir: "{{ project_root }}"
