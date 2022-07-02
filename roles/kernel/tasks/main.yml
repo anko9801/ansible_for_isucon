@@ -1,0 +1,21 @@
+# .PHONY: check-%
+# check-%:
+#   sudo systemctl status ${@:check-%=%}
+
+# .PHONY: check-service
+# check-service: check-$(SERVICE_NAME)
+
+# .PHONY: disable-%
+# disable-%:
+#   sudo systemctl stop ${@:disable-%=%}
+#   sudo systemctl disable ${@:disable-%=%}
+
+# .PHONY: disable-for-app-nginx
+# disable-for-app-nginx: disable-mysql
+
+# .PHONY: disable-for-app
+# disable-for-app: disable-mysql disable-nginx
+
+# .PHONY: disable-for-db
+# disable-for-db: disable-$(SERVICE_NAME) disable-nginx
+

@@ -1,0 +1,4 @@
+- name: send pprof
+  shell: |
+    go tool pprof -png -output /temp/profile.png http://localhost:6060/debug/pprof/profile?seconds=60
+    curl -X POST -F img=@/temp/profile.png $(WEBHOOK_URL) -s -o /dev/null

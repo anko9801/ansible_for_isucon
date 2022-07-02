@@ -1,0 +1,31 @@
+- name: set hostname
+  become: true
+  hostname:
+    name: "{{ hostname }}"
+
+- import_tasks: apt.yml
+  become: true
+
+- import_tasks: update-go.yml
+  become: true
+
+- import_tasks: ./roles/git/tasks/create.yml
+
+- name: Make tmp directory
+  shell: sudo mkdir -p /temp && sudo chmod 777 /temp
+
+- name: Send message of restart server
+  shell: |
+    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーを再起動します。"}' $(WEBHOOK_URL) -s -o /dev/null
+  ignore_errors: true
+
+- name: Restart
+  shell: sudo shutdown -r now
+
+- name: chown
+  shell: sudo chown -R $(USER):$(USER) $(PROJECT_ROOT)
+  ignore_errors: true
+
+- import_tasks: import.yml
+  become: true
+# push

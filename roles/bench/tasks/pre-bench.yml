@@ -1,0 +1,20 @@
+- name: git pull
+  import_tasks: ./roles/git/tasks/pull.yml
+
+- name: Reset reverse proxy
+  import_tasks: ./roles/reverse_proxy/tasks/reset.yml
+
+- name: Reset rdbms
+  import_tasks: ./roles/db/tasks/reset.yml
+
+- name: Reset env
+  import_tasks: ./roles/db/tasks/reset.yml
+
+- name: Apply kernel
+  import_tasks: ./roles/kernel/tasks/apply.yml
+
+- name: Apply netdata
+  import_tasks: ./roles/netdata/tasks/apply.yml
+
+- name: deploy
+  import_tasks: build-deploy.yml

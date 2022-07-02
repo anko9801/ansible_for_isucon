@@ -1,0 +1,8 @@
+- name: git reset
+  shell: |
+    cd $(PROJECT_ROOT) && git reset --hard HEAD^
+  args:
+    chdir: "$(PROJECT_ROOT)"
+# .PHONY: git-reset-%
+# git-reset-%:
+#   cd $(PROJECT_ROOT) && git reset --hard ${@:git-reset-%=%}

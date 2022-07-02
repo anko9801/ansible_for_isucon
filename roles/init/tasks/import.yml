@@ -1,0 +1,14 @@
+- name: Import MySQL
+  import_tasks: ./roles/db/tasks/import.yml
+
+- name: Import Nginx
+  import_tasks: ./roles/reverse_proxy/tasks/import.yml
+
+- name: Import Application
+  import_tasks: ./roles/application/tasks/import.yml
+
+- name: Import Kernel
+  import_tasks: ./roles/kernel/tasks/import.yml
+
+- name: Import netdata
+  import_tasks: ./roles/netdata/tasks/import.yml

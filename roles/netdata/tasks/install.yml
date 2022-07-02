@@ -1,0 +1,4 @@
+- name: Install netdata
+  shell: |
+    curl -sS -o /temp/kickstart.sh https://my-netdata.io/kickstart.sh
+    bash /temp/kickstart.sh

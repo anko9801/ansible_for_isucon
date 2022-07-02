@@ -1,0 +1,6 @@
+- name: Import netdata config
+  shell: |
+    cp /etc/netdata/apps_groups.conf $(PROJECT_ROOT)/settings/
+    curl -X POST -H "Content-type: application/json" -d '{"content": "netdataの設定ファイルをコピーしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+  args:
+    creates: $(PROJECT_ROOT)/settings

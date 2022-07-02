@@ -1,0 +1,4 @@
+- name: Disable Nginx
+  shell: |
+    sudo systemctl stop nginx
+    sudo systemctl disable nginx

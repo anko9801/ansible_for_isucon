@@ -1,0 +1,4 @@
+- name: Disable service
+  shell: |
+    sudo systemctl stop $(SERVICE_NAME)
+    sudo systemctl disable $(SERVICE_NAME)

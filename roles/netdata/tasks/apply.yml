@@ -1,0 +1,5 @@
+- name: Apply netdata
+  shell: |
+    rm -f /etc/netdata/apps_groups.conf
+    sudo cp $(PROJECT_ROOT)/settings/apps_groups.conf /etc/netdata/
+    sudo systemctl restart netdata

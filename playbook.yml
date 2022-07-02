@@ -1,0 +1,4 @@
+- hosts: isucon2022-1
+  become: true
+  roles:
+    - system

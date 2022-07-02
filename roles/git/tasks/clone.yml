@@ -1,0 +1,3 @@
+- name: git clone
+  git:
+    repo: $(GIT_REPO)

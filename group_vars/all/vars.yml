@@ -1,0 +1,35 @@
+# Git関連変数
+git:
+  email: github-actions[bot]@users.noreply.github.com
+  username: ISUCON-Server
+  repo:
+
+# アプリケーション関連変数
+project_root: /home/isucon/webapp
+go_project_root: ${PROJECT_ROOT}/go
+go_latest_version: 1.18.3
+systemctl_service:
+build_name: main
+env_file: ~/env
+
+# DB関連変数
+db:
+  host: 127.0.0.1
+  port: 3306
+  user: isucon
+  name:
+  pass: isucon
+
+# プロファイリング関連変数
+nginx_log: /var/log/nginx/access.log
+mysql_log: /var/log/mysql/slow-query.log
+
+# ローカルデバッグ環境関連変数
+app_port: 9000
+local_go_project_root:
+
+# 自動代入変数の定義
+user: $(shell id -u -n)
+group: $(shell id -g -n)
+uid: $(shell id -u)
+gid: $(shell id -g)

@@ -1,0 +1,4 @@
+- name: Disable MySQL
+  shell: |
+    sudo systemctl stop mysql
+    sudo systemctl disable mysql

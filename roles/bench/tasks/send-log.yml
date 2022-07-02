@@ -1,0 +1,12 @@
+- name: Send Nginx log
+  import_tasks: ./roles/reverse_proxy/tasks/send-log.yml
+
+- name: Send pprof
+  import_tasks: ./roles/application/tasks/send-log.yml
+
+- name: send mysql log
+  import_tasks: ./roles/db/tasks/send-log.yml
+
+- name: send bench completed
+  shell: |
+    curl -X POST -H "Content-type: application/json" -d '{"content": "ベンチマークのログを正常に送信しました。"}' $(WEBHOOK_URL) -s -o /dev/null

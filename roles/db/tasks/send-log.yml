@@ -1,0 +1,4 @@
+- name: Send MySQL log
+  shell: |
+    sudo mysqldumpslow -s t -t 10 $(MYSQL_LOG) > /temp/mysql.txt
+    curl -X POST -F txt=@/temp/mysql.txt $(WEBHOOK_URL) -s -o /dev/null

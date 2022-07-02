@@ -1,0 +1,13 @@
+- name: Import env config
+  shell: |
+    cp -i $(ENV_FILE) $(PROJECT_ROOT)/settings
+    curl -X POST -H "Content-type: application/json" -d '{"content": "$(ENV_FILE)をコピーしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+  args:
+    creates: $(PROJECT_ROOT)/settings
+
+- name: Import service config
+  shell: |
+    cp -i /etc/systemd/system/$(SERVICE_NAME).service $(PROJECT_ROOT)/settings/
+    curl -X POST -H "Content-type: application/json" -d '{"content": "serviceファイルをコピーしました。"}' $(WEBHOOK_URL) -s -o /dev/null
+  args:
+    creates: $(PROJECT_ROOT)/settings

@@ -1,0 +1,23 @@
+- name: Install MySQL
+  shell: |
+    sudo apt update && sudo apt-get install mysql-server mysql-client -y
+    sudo mysql -e "CREATE USER IF NOT EXISTS '$(DB_USER)'@'localhost' IDENTIFIED BY '$(DB_PASS)'"
+    sudo mysql -e "GRANT ALL PRIVILEGES ON * . * TO '$(DB_USER)'@'localhost';"
+    sudo mysql -e "FLUSH PRIVILEGES;"
+    sudo mysql -e "CREATE DATABASE $(DB_NAME);"
+    curl -X POST -H "Content-type: application/json" \
+      -d '{"content": "MySQLを正常にインストールし、ユーザー「$(DB_USER)」・データベース「$(DB_NAME)」を作成しました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    sudo systemctl status mysql
+    mysql --version
+
+- name: Install MariaDB
+  shell: |
+    sudo apt update && sudo apt-get install mariadb-client mariadb-server -y
+    sudo mysql -e "CREATE USER IF NOT EXISTS '$(DB_USER)'@'localhost' IDENTIFIED BY '$(DB_PASS)'"
+    sudo mysql -e "GRANT ALL PRIVILEGES ON * . * TO '$(DB_USER)'@'localhost';"
+    sudo mysql -e "FLUSH PRIVILEGES;"
+    sudo mysql -e "CREATE DATABASE $(DB_NAME);"
+    curl -X POST -H "Content-type: application/json" \
+      -d '{"content": "MariaDBを正常にインストールし、ユーザー「$(DB_USER)」・データベース「$(DB_NAME)」を作成しました。"}' $(WEBHOOK_URL) -s -o /dev/null
+    sudo systemctl status mysql
+    mariadb --version

@@ -1,0 +1,4 @@
+- name: kernel apply
+  shell: |
+    sudo cp -f $(PROJECT_ROOT)/settings/100-isucon.conf /etc/sysctl.d/100-isucon.conf
+    sudo sysctl -p /etc/sysctl.d/100-isucon.conf >> /dev/null

@@ -1,0 +1,19 @@
+- name: apt update
+  apt:
+    update_cache: yes
+
+# すげー時間掛かる
+# - name: apt upgrade
+#   apt:
+#     upgrade: yes
+
+- name: Install common packages
+  apt:
+    name:
+      - htop
+      - dstat
+      - graphviz
+    state: latest
+    update_cache: yes
+
+      --add-host="archive.ubuntu.com:160.26.2.187"

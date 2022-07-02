@@ -1,0 +1,94 @@
+- name: set yum proxy
+  blockinfile:
+    path: ~/.ssh/config
+    insertafter: "^proxy=.*$"
+    block: |
+      Host $(HOST1)
+        HostName $(HOST1_IP)
+        User $(SSH_USER)
+
+      Host $(HOST2)
+        HostName $(HOST2_IP)
+        User $(SSH_USER)
+
+      Host $(HOST3)
+        HostName $(HOST3_IP)
+        User $(SSH_USER)
+
+- name: bastation
+  blockinfile:
+    path: ~/.ssh/config
+    insertafter: "^proxy=.*$"
+    block: |
+      Host $(BASTATION)
+        HostName $(BASTATION_IP)
+        Port $(BASTATION_PORT)
+        User $(SSH_USER)
+
+      Host $(HOST1)
+        HostName $(HOST1_IP)
+        User $(SSH_USER)
+        ProxyJump $(HOST1)-bastion
+
+      Host $(HOST2)
+        HostName $(HOST2_IP)
+        User $(SSH_USER)
+        ProxyJump $(HOST2)-bastion
+
+      Host $(HOST3)
+        HostName $(HOST3_IP)
+        User $(SSH_USER)
+        ProxyJump $(HOST3)-bastion
+
+# .PHONY: ssh-%
+# ssh-%:
+#   ssh $(HOST${@:ssh-%=%})
+
+# .PHONY: ssh-reset
+# ssh-reset:
+#   rm -f ~/.ssh/config
+
+# .PHONY: ssh-keygen
+# ssh-keygen:
+#   @rm -rf deploy_key
+#   @mkdir deploy_key
+#   @ssh-keygen -t ed25519 -C "" -N "" -f ./deploy_key/id_ed25519 >> /dev/null
+#   @cat ./deploy_key/id_ed25519.pub
+
+# .PHONY: scp-%
+# scp-%:
+#   scp Makefile $(HOST${@:scp-%=%}):/home/isucon
+#   scp deploy_key/id_ed25519 $(HOST${@:scp-%=%}):/home/isucon/.ssh
+
+# .PHONY: pull-dump-%
+# pull-dump-%:
+#   ssh $(HOST${@:pull-dump-%=%}) mysqldump -h$(DB_HOST) -P$(DB_PORT) -u$(DB_USER) -p$(DB_PASS) $(DB_NAME) > /temp/dump.sql
+#   scp $(HOST${@:pull-dump-%=%}):/temp/dump.sql .
+#   ssh $(HOST${@:pull-dump-%=%}) rm /temp/dump.sql
+
+# .PHONY: up
+# up:
+#   MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker compose up -d --build
+#   MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker compose exec -w /home/$(USER)/isucon isucon dockerize -wait tcp://localhost:3306 -timeout 60s
+#   MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker compose exec -T isucon mysql -u$(DB_USER) -p$(DB_PASS) $(DB_NAME) < ./dump.sql
+#   MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker compose exec -d -u $(USER) -w /home/$(USER)/isucon/$(LOCAL_GO_PROJECT_ROOT) isucon air
+#   -@rm -rf dump.sql
+
+# .PHONY: down
+# down:
+#   MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker-compose down
+
+# .PHONY: re-up
+# re-up:
+#   @MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker-compose up -d > /dev/null 2>&1
+
+# .PHONY: exec
+# exec: re-up
+#   @MYSQL_USER=$(DB_USER) MYSQL_PASSWORD=$(DB_PASS) MYSQL_DATABASE=$(DB_NAME) APP_PORT=$(APP_PORT) UID=${UID} USER=$(USER) GID=${GID} GROUP=$(GROUP) \
+#   docker compose exec -u $(USER) -w /home/$(USER)/isucon isucon bash

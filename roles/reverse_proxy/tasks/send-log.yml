@@ -1,0 +1,6 @@
+- name: Send Nginx log
+  shell: |
+    cat $(NGINX_LOG) | kataribe > /temp/kataribe.txt
+    curl -X POST -F txt=@/temp/kataribe.txt $(WEBHOOK_URL) -s -o /dev/null
+  args:
+    chdir: $(PROJECT_ROOT)/settings

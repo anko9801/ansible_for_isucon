@@ -1,0 +1,13 @@
+- name: build
+  shell: |
+    go build -o $(BIN_NAME)
+  args:
+    chdir: $(GO_PROJECT_ROOT)
+
+- name: deploy
+  shell: |
+    sudo systemctl stop $(SERVICE_NAME)
+    sudo rm -f /etc/systemd/system/$(SERVICE_NAME).service
+    sudo cp $(PROJECT_ROOT)/settings/$(SERVICE_NAME).service /etc/systemd/system/
+    sudo systemctl start $(SERVICE_NAME)
+    sudo systemctl daemon-reload
