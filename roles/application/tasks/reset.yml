@@ -1,5 +1,5 @@
 - name: reset-env
   shell: |
     $(eval ENV_FILE_NAME := $(shell ENV_FILE=$(ENV_FILE) && echo $$ENV_FILE | sed -e 's/.*\///g'))
-    rm -f {{ env_file }}
-    cp {{ project_root }}/settings/{{ env_file_name }} {{ env_file }}
+    rm -f $(ENV_FILE)
+    cp {{ project_root }}/settings/$(ENV_FILE_NAME) $(ENV_FILE)

@@ -3,6 +3,20 @@
     sudo mkdir -p /temp && sudo chmod 777 /temp
     mkdir -p {{ project_root }}/settings
 
+- name: ssh-keygen
+  shell: |
+    rm -rf deploy_key
+    mkdir deploy_key
+    ssh-keygen -t ed25519 -C "" -N "" -f ./deploy_key/id_ed25519 >> /dev/null
+    cat ./deploy_key/id_ed25519.pub
+  args:
+    chdir: "~/.ssh"
+  register: ssh_keygen
+
+- name: show public ssh-key
+  debug:
+    msg: "{{ ssh_keygen.stdout }}"
+
 - name: chown
   shell: sudo chown -R {{ user }}:{{ user }} {{ project_root }}
   ignore_errors: true

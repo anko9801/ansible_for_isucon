@@ -24,7 +24,7 @@
     chdir: "{{ project_root }}"
   ignore_errors: true
 
-# TODO: 編集方法
+# TODO: エディタでの編集方法
 - name: Set gitignore
   shell: |
     find ./ -size +100M >> .gitignore

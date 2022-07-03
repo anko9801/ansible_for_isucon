@@ -12,6 +12,6 @@
 
 - name: Restart
   shell: |
-    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーを再起動します。"}' {{ discord_webhook_url }} -s -o /dev/null
+    curl -X POST -H "Content-type: application/json" -d '{"content": "サーバーを再起動します。再起動後にプッシュしてください。"}' {{ discord_webhook_url }} -s -o /dev/null
     sudo shutdown -r now
   ignore_errors: true

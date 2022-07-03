@@ -11,10 +11,21 @@
     sudo systemctl status nginx
     nginx -v
 
-- name: Install kataribe
+- name: test
   shell: |
-    bash -lc "go install github.com/matsuu/kataribe@latest"
-    bash -lc "cd {{ project_root }}/settings && kataribe -generate"
-    curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' {{ discord_webhook_url }} -s -o /dev/null
-  args:
-    chdir: "{{ project_root }}"
+    bash -i -lc "source ~/.bashrc && echo $PATH"
+  register: path
+
+- name: show previous shell stdout
+  debug:
+    msg: "{{ path.stdout }}"
+# ログインシェルを実行できず、インストールできない
+# - name: Install kataribe
+#   shell: |
+#     source ~/.bashrc
+#     bash -ilc "go install github.com/matsuu/kataribe@latest"
+#     bash -ilc "cd {{ project_root }}/settings && kataribe -generate"
+#     curl -X POST -H "Content-type: application/json" -d '{"content": "kataribeを導入しました。Nginxのアクセスログを設定して下さい!"}' {{ discord_webhook_url }} -s -o /dev/null
+#   args:
+#     executable: /bin/bash
+#     chdir: "{{ project_root }}"
