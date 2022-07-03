@@ -5,10 +5,9 @@
 
 - name: ssh-keygen
   shell: |
-    rm -rf deploy_key
-    mkdir deploy_key
-    ssh-keygen -t ed25519 -C "" -N "" -f ./deploy_key/id_ed25519 >> /dev/null
-    cat ./deploy_key/id_ed25519.pub
+    pwd
+    ssh-keygen -t ed25519 -C "" -N "" -f ./id_ed25519 >> /dev/null
+    cat ./id_ed25519.pub
   args:
     chdir: "~/.ssh"
   register: ssh_keygen

@@ -1,4 +1,4 @@
-- name: reset-env
+- name: Apply env
   shell: |
     $(eval ENV_FILE_NAME := $(shell ENV_FILE=$(ENV_FILE) && echo $$ENV_FILE | sed -e 's/.*\///g'))
     rm -f $(ENV_FILE)

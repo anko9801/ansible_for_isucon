@@ -1,4 +1,4 @@
-- name: reset nginx
+- name: Apply Nginx
   shell: |
     sudo rm -r /etc/nginx
     sudo cp -r {{ project_root }}/settings/nginx/ /etc/nginx/

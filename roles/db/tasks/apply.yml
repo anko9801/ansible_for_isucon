@@ -1,4 +1,4 @@
-- name: Reset MySQL
+- name: Apply MySQL
   shell: |
     sudo rm -r /etc/mysql
     sudo cp -r {{ project_root }}/settings/mysql/ /etc/mysql/
