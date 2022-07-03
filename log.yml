@@ -1,0 +1,6 @@
+- hosts: isucon2022-1
+  remote_user: "{{ ssh.name }}"
+  become: true
+  gather_facts: false
+  tasks:
+    import_tasks: ./roles/bench/tasks/log.yml

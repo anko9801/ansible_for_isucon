@@ -3,8 +3,7 @@
     - local
 
 - hosts: isucon2022-1
-  remote_user: "{{ ssh.name }}"
-  become: true
-  gather_facts: false
+  # remote_user: "{{ ssh.name }}"
+  gather_facts: true
   roles:
     - init

@@ -11,14 +11,6 @@
     sudo systemctl status nginx
     nginx -v
 
-- name: test
-  shell: |
-    bash -i -lc "source ~/.bashrc && echo $PATH"
-  register: path
-
-- name: show previous shell stdout
-  debug:
-    msg: "{{ path.stdout }}"
 # ログインシェルを実行できず、インストールできない
 # - name: Install kataribe
 #   shell: |

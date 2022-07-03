@@ -5,11 +5,11 @@
 
 - name: ssh-keygen
   shell: |
-    pwd
     ssh-keygen -t ed25519 -C "" -N "" -f ./id_ed25519 >> /dev/null
+    sudo chmod 600 ./id_ed25519
     cat ./id_ed25519.pub
   args:
-    chdir: "~/.ssh"
+    chdir: /home/isucon/.ssh
   register: ssh_keygen
 
 - name: show public ssh-key

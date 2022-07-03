@@ -1,0 +1,4 @@
+- hosts: isucon2022-1
+  gather_facts: false
+  tasks:
+    - import_tasks: ./roles/bench/tasks/pre-bench.yml
